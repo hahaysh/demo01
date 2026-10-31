@@ -1,10 +1,508 @@
-<html>
-    <head>
-        <title>My Page</title>
-    </head>
-    <body>
-        <h1>Welcome to My Page</h1>
-        <h1>Welcome to My Page</h1>
-        <h1>Welcome to My Page</h1>
-    </body>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#e6efd9">
+  <meta name="description" content="상암중학교 2026 가을 행사. 11월 1일부터 5일까지 월드컵경기장에서 만나요!">
+  <title>학교 밖에서, 제대로 놀자! · 상암중학교</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #193b32;
+      --paper: #faf9f3;
+      --mint: #e4efd9;
+      --orange: #ff703b;
+      --lime: #e5f58a;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Noto Sans KR", "Malgun Gothic", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    button { font: inherit; }
+    .page-header {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 28px 28px 23px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .school-brand { display: flex; align-items: center; gap: 10px; }
+    .school-mark {
+      width: 37px;
+      height: 37px;
+      display: grid;
+      place-items: center;
+      border: 1.5px solid var(--ink);
+      border-radius: 50%;
+      background: var(--lime);
+    }
+    .school-brand strong { display: block; font-size: 14px; font-weight: 900; letter-spacing: -.5px; }
+    .school-brand small { display: block; margin-top: 2px; font-size: 9px; font-weight: 600; letter-spacing: 1.4px; }
+    .header-right { display: flex; align-items: center; gap: 22px; }
+    .edition { font-size: 11px; font-weight: 600; letter-spacing: 1px; }
+    .print-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 15px;
+      border: 1px solid #cbd1c5;
+      border-radius: 8px;
+      color: var(--ink);
+      background: transparent;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      transition: background .2s, transform .2s;
+    }
+    .print-button:hover { background: var(--mint); transform: translateY(-2px); }
+    .print-button:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+    main { padding: 0 28px; }
+    .poster {
+      position: relative;
+      isolation: isolate;
+      max-width: 1024px;
+      margin: 0 auto;
+      overflow: hidden;
+      border: 2px solid var(--ink);
+      border-radius: 18px;
+      background: var(--mint);
+      box-shadow: 0 8px 0 #193b3210;
+    }
+    .poster::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: .3;
+      background-image: radial-gradient(#6e8d67 .8px, transparent .8px);
+      background-size: 13px 13px;
+      pointer-events: none;
+    }
+    .poster-topline {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 30px 0;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.8px;
+    }
+    .topline-left { display: flex; align-items: center; gap: 8px; }
+    .live-dot { width: 7px; height: 7px; background: var(--orange); border-radius: 50%; }
+    .hero {
+      position: relative;
+      padding: 28px 20px 0;
+      text-align: center;
+    }
+    .event-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      border: 1.5px solid var(--ink);
+      border-radius: 30px;
+      background: var(--paper);
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 2px 3px 0 var(--ink);
+      transform: rotate(-3deg);
+    }
+    h1 {
+      position: relative;
+      z-index: 2;
+      margin: 23px 0 14px;
+      font-family: "Black Han Sans", "Noto Sans KR", "Malgun Gothic", sans-serif;
+      font-weight: 900;
+      font-size: clamp(40px, 7.7vw, 84px);
+      line-height: 1.12;
+      letter-spacing: -4px;
+    }
+    h1 span { display: block; }
+    .headline-orange {
+      color: var(--orange);
+      margin-top: 3px;
+      -webkit-text-stroke: 1.5px var(--ink);
+      paint-order: stroke fill;
+      text-shadow: 3px 5px 0 var(--ink);
+    }
+    .hero-description { position: relative; z-index: 2; margin: 0; font-size: 14px; font-weight: 600; letter-spacing: -.4px; }
+    .hero-description strong { background: var(--lime); padding: 0 3px; font-weight: 900; }
+    .emoji-sticker { position: absolute; z-index: 3; user-select: none; line-height: 1; }
+    .sparkle { top: 110px; left: 9%; font-size: 52px; transform: rotate(-13deg); }
+    .headphones { top: 44px; right: 13%; font-size: 41px; transform: rotate(16deg); }
+    .peace { top: 245px; left: 11%; font-size: 42px; transform: rotate(-14deg); }
+    .heart { top: 212px; right: 10%; font-size: 38px; transform: rotate(15deg); }
+    .little-star { top: 79px; left: 21%; color: var(--orange); font-size: 28px; }
+    .hero-scribble { position: absolute; right: 5%; top: 135px; width: 46px; transform: rotate(13deg); }
+    .art-scene { position: relative; margin-top: 6px; }
+    .scene { display: block; width: 100%; height: auto; }
+    .speech-bubble {
+      position: absolute;
+      left: 7%;
+      top: 27%;
+      padding: 13px 19px;
+      border: 2px solid var(--ink);
+      border-radius: 16px 16px 3px 16px;
+      background: var(--paper);
+      font-size: 16px;
+      font-weight: 900;
+      line-height: 1.5;
+      transform: rotate(-9deg);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .speech-bubble span { color: #e65b2c; }
+    .vibe-sticker {
+      position: absolute;
+      top: 35%;
+      right: 5%;
+      display: grid;
+      place-items: center;
+      width: 101px;
+      height: 101px;
+      border: 2px solid var(--ink);
+      border-radius: 50%;
+      background: var(--lime);
+      transform: rotate(13deg);
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .vibe-sticker div { text-align: center; font-size: 12px; line-height: 1.35; font-weight: 900; }
+    .vibe-sticker b { display: block; font-size: 32px; margin: 3px 0; }
+    .art-caption {
+      position: absolute;
+      left: 50%;
+      bottom: 17px;
+      transform: translateX(-50%) rotate(-3deg);
+      white-space: nowrap;
+      background: var(--paper);
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      padding: 7px 18px;
+      font-size: 12px;
+      font-weight: 900;
+      box-shadow: 3px 3px 0 var(--ink);
+    }
+    .ticker {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      overflow: hidden;
+      padding: 11px 18px;
+      border-top: 2px solid var(--ink);
+      border-bottom: 2px solid var(--ink);
+      background: var(--ink);
+      color: var(--lime);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+    .ticker span { display: flex; align-items: center; gap: 24px; }
+    .ticker i { color: var(--orange); font-style: normal; font-size: 16px; }
+    .event-details { padding: 25px 31px 21px; background: var(--paper); }
+    .details-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 23px; }
+    .detail-card {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      padding: 18px 22px;
+      border: 1.5px solid var(--ink);
+      border-radius: 11px;
+      background: #f0f3e8;
+    }
+    .detail-card.location { background: #fff0e6; }
+    .detail-emoji { font-size: 32px; }
+    .detail-label { display: block; font-size: 10px; font-weight: 800; letter-spacing: 1.1px; }
+    .detail-value { display: block; margin-top: 5px; font-size: 24px; font-weight: 900; line-height: 1.25; letter-spacing: -1px; }
+    .detail-value small { font-size: 13px; letter-spacing: 0; }
+    .detail-sub { display: block; margin-top: 5px; font-size: 11px; font-weight: 600; opacity: .7; }
+    .poster-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 21px; }
+    .footer-message { margin: 0; font-size: 12px; font-weight: 700; }
+    .footer-tags { font-size: 10px; font-weight: 700; color: #647166; }
+    .page-footer { max-width: 1024px; margin: 22px auto 28px; display: flex; justify-content: space-between; gap: 12px; padding: 0 3px; color: #798276; font-size: 10px; }
+    .page-footer span:last-child { letter-spacing: 1px; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .headphones { animation: bob 4s ease-in-out infinite; }
+      .heart { animation: bob 4s ease-in-out 1s infinite; }
+      @keyframes bob { 50% { translate: 0 -6px; } }
+    }
+    @media (max-width: 720px) {
+      .page-header { padding: 20px 16px; }
+      .edition { display: none; }
+      main { padding: 0 14px; }
+      .poster-topline { padding: 17px 18px 0; font-size: 8px; letter-spacing: 1px; }
+      .hero { padding-top: 24px; }
+      .event-pill { font-size: 11px; padding: 7px 13px; }
+      h1 { font-size: clamp(38px, 9.2vw, 65px); letter-spacing: -2px; margin-top: 22px; }
+      .hero-description { font-size: 11px; }
+      .sparkle { left: 4%; top: 84px; font-size: 30px; }
+      .headphones { right: 5%; top: 34px; font-size: 28px; }
+      .peace { left: 6%; top: 195px; font-size: 28px; }
+      .heart { right: 4%; top: 170px; font-size: 25px; }
+      .little-star { top: 44px; left: 11%; font-size: 18px; }
+      .hero-scribble { width: 25px; right: 3%; top: 102px; }
+      .speech-bubble { font-size: 10px; padding: 7px 10px; border-radius: 10px 10px 2px 10px; left: 4%; top: 25%; box-shadow: 2px 2px 0 var(--ink); }
+      .vibe-sticker { width: 64px; height: 64px; right: 3%; top: 33%; box-shadow: 2px 2px 0 var(--ink); }
+      .vibe-sticker div { font-size: 8px; }
+      .vibe-sticker b { font-size: 20px; margin: 1px 0; }
+      .art-caption { font-size: 9px; padding: 5px 10px; bottom: 7px; box-shadow: 2px 2px 0 var(--ink); }
+      .ticker { gap: 18px; padding: 8px 10px; font-size: 9px; letter-spacing: .5px; }
+      .ticker span { gap: 16px; }
+      .ticker span:last-child { display: none; }
+      .event-details { padding: 17px; }
+      .details-grid { gap: 10px; grid-template-columns: 1fr; }
+      .detail-card { padding: 13px 17px; gap: 13px; }
+      .detail-emoji { font-size: 27px; }
+      .detail-value { font-size: 22px; }
+      .detail-sub { margin-top: 3px; }
+      .poster-footer { flex-direction: column; gap: 8px; margin-top: 16px; text-align: center; }
+      .footer-message { font-size: 11px; }
+      .page-footer { margin: 18px 16px 24px; font-size: 9px; }
+    }
+    @media print {
+      @page { size: A4 portrait; margin: 8mm; }
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      body { background: white; }
+      .page-header, .page-footer { display: none; }
+      main { padding: 0; }
+      .poster { width: 100%; max-width: none; border-radius: 10px; box-shadow: none; break-inside: avoid; }
+      .poster-topline { padding: 18px 25px 0; }
+      .hero { padding-top: 22px; }
+      h1 { font-size: 68px; }
+      .event-details { padding: 20px 25px; }
+      .details-grid { grid-template-columns: 1.3fr 1fr; gap: 15px; }
+      .detail-card { padding: 14px 16px; }
+      .detail-value { font-size: 21px; }
+      .poster-footer { flex-direction: row; }
+      .emoji-sticker { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="page-header">
+    <div class="school-brand">
+      <span class="school-mark" aria-hidden="true">
+        <svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m3 9 9-5 9 5-9 5-9-5Z"/><path d="M6 11v6c4 3 8 3 12 0v-6M21 9v7"/>
+        </svg>
+      </span>
+      <div><strong>상암중학교</strong><small>SANGAM MIDDLE SCHOOL</small></div>
+    </div>
+    <div class="header-right">
+      <span class="edition">2026 AUTUMN EDITION</span>
+      <button class="print-button" type="button" id="print-poster">
+        <svg aria-hidden="true" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M7 8V3h10v5M7 17H4V9h16v8h-3"/><path d="M7 14h10v7H7zM17 11h.01"/>
+        </svg>
+        포스터 인쇄
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <article class="poster" aria-label="상암중학교 가을 행사 포스터">
+      <div class="poster-topline">
+        <span class="topline-left"><span class="live-dot" aria-hidden="true"></span> SANGAM SCHOOL FEST</span>
+        <span>01 — 05 NOV. 2026</span>
+      </div>
+
+      <section class="hero" aria-labelledby="poster-title">
+        <div class="event-pill">🍁 상암중학교 2026 가을 행사</div>
+        <h1 id="poster-title"><span>학교 밖에서,</span><span class="headline-orange">제대로 놀자!</span></h1>
+        <p class="hero-description">친구랑 함께라서 더 빛나는 우리 ✨ <strong>이번 주, 추억 추가요!</strong></p>
+        <span class="emoji-sticker sparkle" aria-hidden="true">✨</span>
+        <span class="emoji-sticker headphones" aria-hidden="true">🎧</span>
+        <span class="emoji-sticker peace" aria-hidden="true">✌️</span>
+        <span class="emoji-sticker heart" aria-hidden="true">💖</span>
+        <span class="emoji-sticker little-star" aria-hidden="true">✦</span>
+        <svg class="hero-scribble" aria-hidden="true" viewBox="0 0 48 55" fill="none" stroke="#193b32" stroke-width="3.5" stroke-linecap="round">
+          <path d="m6 22 12 6M20 5l4 14M40 13l-8 13"/>
+        </svg>
+      </section>
+
+      <div class="art-scene">
+        <svg class="scene" viewBox="0 0 1020 370" role="img" aria-labelledby="scene-title scene-desc">
+          <title id="scene-title">친구들과 함께하는 신나는 가을 축제</title>
+          <desc id="scene-desc">월드컵경기장 앞에서 헤드폰을 쓴 학생과 두 친구가 활짝 웃으며 뛰는 오리지널 만화풍 일러스트. 별, 꽃, 음악, 색종이가 주변을 장식합니다.</desc>
+          <defs>
+            <pattern id="court-grid" width="65" height="27" patternUnits="userSpaceOnUse" patternTransform="skewX(-35)">
+              <path d="M65 0H0V27" fill="none" stroke="#7fa384" stroke-width="1" opacity=".35"/>
+            </pattern>
+          </defs>
+
+          <!-- Stadium and a gently curved playground frame the students. -->
+          <g stroke="#58795e" stroke-width="1.5" fill="none" opacity=".38">
+            <path d="M104 245V169Q180 146 294 157M725 158Q840 146 924 169V245"/>
+            <path d="M91 169Q189 130 319 153M706 152Q832 129 938 169"/>
+            <path d="M106 181h161M753 181h170M109 194h139M774 194h147"/>
+            <path d="m132 159 4 85m25-91 4 91m25-94 4 94m25-95 4 95m25-95 4 95m537-94-4 94m34-95-4 95m33-94-4 94m34-90-4 90"/>
+            <path d="M94 146v-38m0 0 18 6-18 7M929 146v-38m0 0-18 6 18 7"/>
+          </g>
+          <path d="M0 288Q510 163 1020 288V370H0Z" fill="#c0d9ae"/>
+          <path d="M0 288Q510 163 1020 288V370H0Z" fill="url(#court-grid)"/>
+          <path d="M20 345Q510 228 1000 345M165 370Q510 245 850 370" fill="none" stroke="#f5f6e5" stroke-width="3" opacity=".85"/>
+          <ellipse cx="519" cy="319" rx="224" ry="23" fill="#45694e" opacity=".15"/>
+
+          <g stroke="#193b32" stroke-width="2.5" stroke-linejoin="round">
+            <g transform="translate(172 30) rotate(-13)">
+              <path d="m0 22 13-4 2-14 12 9 14-4-4 14 9 12-15 1-9 12-5-14-14-4Z" fill="#ffe086"/>
+            </g>
+            <g transform="translate(828 63) rotate(14)">
+              <path d="m0 15 10-4 2-11 8 8 11-1-5 11 5 10-11-1-8 8-2-11-10-4Z" fill="#ff9263"/>
+            </g>
+            <path d="m246 191 6-16 8 14 17 3-13 10 1 17-13-10-16 6 6-15-10-12Z" fill="#e5f58a"/>
+            <path d="m782 222 5-11 6 11 12 2-9 8 1 12-10-7-11 4 3-12-8-9Z" fill="#fff1b5"/>
+            <g transform="translate(866 241)">
+              <path d="M0 0q-12-22-21-10t10 19q-25 4-17 16t22-4q-5 26 10 24t10-22q24 8 27-6T17 5Q30-15 16-19T0 0Z" fill="#ff9aaf"/>
+              <circle cx="7" cy="7" r="9" fill="#ffe786"/>
+              <path d="M3 6h.1M11 6h.1M4 10q3 3 6 0" fill="none" stroke-width="2"/>
+            </g>
+            <g transform="translate(111 277) rotate(-18)">
+              <rect x="0" y="0" width="63" height="45" rx="10" fill="#b4aff1"/>
+              <circle cx="31" cy="22" r="13" fill="#faf9f3"/>
+              <circle cx="31" cy="22" r="7" fill="#ff703b"/>
+              <path d="M10 10h6M48 10h4"/>
+            </g>
+            <g transform="translate(905 302) rotate(12)">
+              <path d="m0 0 25-9v29q-13 12-17 3t11-11V-2L6 3v24q-14 12-17 3t11-11Z" fill="#193b32"/>
+            </g>
+          </g>
+          <g fill="#ff703b">
+            <path d="m292 45 5-10 7 3-5 11ZM753 77l5-13 6 3-3 12ZM213 267l-8 7-4-6 8-7Z"/>
+            <circle cx="776" cy="37" r="4"/><circle cx="168" cy="207" r="4"/>
+          </g>
+          <g fill="#8b87ca"><path d="m212 84 8-9 5 5-8 9ZM821 173l11 6-4 6-11-6Z"/><circle cx="312" cy="130" r="4"/></g>
+          <g stroke="#193b32" stroke-width="2.5" stroke-linecap="round" fill="none">
+            <path d="m278 103 8-12m-14-2 3-13M746 137l11-3m-7-10 9-9M299 274l-11 3m7-13-9-5"/>
+            <path d="M183 103q-11 3-7 11t13-2 10-2" stroke="#77995c"/>
+            <path d="M838 111q-8 4-5 10t13-1"/>
+          </g>
+
+          <!-- Original, ink-outlined student characters. -->
+          <g stroke="#193b32" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Left: a friend in a blue varsity jacket. -->
+            <path d="M327 141q-10-57 25-75 43-19 63 23l1 77-22 22-61-15Z" fill="#293f37"/>
+            <path d="m335 230-19 54-10 23 19 8 22-26 21-41M373 240l14 52 11 20 19-10-8-29-5-48" fill="#ffd1b0"/>
+            <path d="m310 300-15 13q-6 7 0 12l27 5 13-19-12-9Z" fill="#faf9f3"/>
+            <path d="m398 303-1 22 34-1q9-6 0-11l-18-14Z" fill="#faf9f3"/>
+            <path d="m300 320 27 6m75-8h26" fill="none"/>
+            <path d="m334 198-16 54q42 20 89-2l-18-54" fill="#ffe08a"/>
+            <path d="m343 222-8 29m29-28-1 34m25-33 5 29" stroke="#b59947" stroke-width="2"/>
+            <path d="m335 155-15 12-35-47-16 13q10 43 47 61l17 20 60-2 11-28 33-32-13-17-35 24-12-6Z" fill="#76b9dd"/>
+            <path d="m320 167-5 21m18-27-6 45m58-47 7 47M328 207l62 1" fill="none"/>
+            <path d="m342 153 18 26 18-25-9-14" fill="#faf9f3"/>
+            <path d="m352 176 8 10 9-11m-10 11-1 22" fill="none"/>
+            <path d="m359 143-1 15q7 8 16 0l-1-17" fill="#ffd1b0"/>
+            <path d="M337 107q0-30 29-32 33 2 31 36l-2 24q-15 24-35 15-20-7-23-27Z" fill="#ffd1b0"/>
+            <path d="M335 105q-3-41 37-33 29 5 29 38-21-6-35-26-10 17-31 21Z" fill="#293f37"/>
+            <path d="M345 116q4-7 10 0m21 1q4-6 9 0" fill="none"/>
+            <path d="M357 130q10 15 19-1Z" fill="#faf9f3" stroke-width="2.5"/>
+            <path d="m345 126 5 1m31 0 5-1" stroke="#eb8c7e" stroke-width="4"/>
+            <path d="m338 90-7-10 7-6 8 10" fill="#ff9263" stroke-width="2"/>
+            <path d="M268 136q-16-7-15-18l-6-14q-1-6 4-5l9 12-5-25q1-6 6-2l9 24 2-22q4-4 7 1l1 29 7 8Z" fill="#ffd1b0"/>
+            <path d="m423 136 12-13q11-13 17-4l-1 10-16 24" fill="#ffd1b0"/>
+            <path d="m284 121-16 14m153-2 15 18" stroke="#faf9f3" stroke-width="7"/>
+
+            <!-- Right: a friend with a lavender sweatshirt. -->
+            <path d="m632 248-10 40-17 19 17 12 26-24 16-37M674 252l20 37 24 20 13-17-19-23-10-37" fill="#ffd1b0"/>
+            <path d="m606 304-18 10q-10 7-3 14l30 1 14-18Z" fill="#faf9f3"/>
+            <path d="m718 294 17 2 10 25q0 11-10 7l-21-16Z" fill="#faf9f3"/>
+            <path d="m590 322 22 1m116-15 11 13" fill="none"/>
+            <path d="m625 215-6 47 36 7 11-32 9 25 37-11-14-41Z" fill="#77985f"/>
+            <path d="m666 237-2-13m-37 30 25 6m24-5 28-10" fill="none" stroke-width="2"/>
+            <path d="m640 144-18 13-35-34-14 15q13 35 50 53l2 37 73-8-1-46 23 24 35-34-13-16-22 16-26-32Z" fill="#b6a4e6"/>
+            <path d="m625 191 4-20m68 3-11-15M633 216l55-5" fill="none"/>
+            <path d="m650 141 3 15q12 11 21-3l-5-14" fill="#ffd1b0"/>
+            <path d="M631 95q3-37 35-33 32 2 36 32l-7 30q-12 27-37 23-20-4-24-24Z" fill="#ffd1b0"/>
+            <path d="m628 103-6-17 8-6-1-15 17 2 10-14 13 9 16-6 6 14 15 8-6 24-13 6-3-20-14 8-15-14-8 17-13-3 1 18Z" fill="#293f37"/>
+            <path d="m643 112 10 2m24 0 10-5" fill="none"/>
+            <path d="M658 126q11 14 20-3Z" fill="#faf9f3" stroke-width="2.5"/>
+            <path d="m643 123 5 1m38-5 4-1" stroke="#eb8c7e" stroke-width="4"/>
+            <path d="m661 173 3 18 16-3" fill="none" stroke="#faf9f3" stroke-width="4"/>
+            <path d="m585 125-10-16q-7-11-13-5l-3 10q-2 8 13 26M741 150l11-22 8 2-1 13 14-12q7-2 6 5l-9 14q11 0 8 7l-22 12Z" fill="#ffd1b0"/>
+            <path d="m575 136 13-14m153 27 13 17" stroke="#faf9f3" stroke-width="7"/>
+
+            <!-- Center: orange hoodie, headphones, and a big main-character smile. -->
+            <path d="m475 243-16 51-11 29 24 7 17-24 19-41M532 252l14 40 24 29 20-13-16-31-10-41" fill="#293f37"/>
+            <path d="m450 316-19 14q-9 10 1 14l36-1 13-19-10-7Z" fill="#fff9e8"/>
+            <path d="m570 309 4 29 34-4q13-5 2-13l-21-15Z" fill="#fff9e8"/>
+            <path d="m435 336 30 1m116-8 23-2" fill="none"/>
+            <path d="m478 146-16 11-26-41-22 11q7 52 48 64l-4 58q52 23 110-5l-6-55 31-45 8-63-23-3-14 53-24 17Z" fill="#ff8c51"/>
+            <path d="m476 147 25 22 39-24-13-17-31 3Z" fill="#ffb477"/>
+            <path d="m497 151 9 29 23-30" fill="none"/>
+            <path d="m501 178-3 22m28-25 4 22" fill="none" stroke="#fff5dd" stroke-width="3"/>
+            <path d="m490 217-9 19q24 12 50 0l-5-20Z" fill="#ffab6d" stroke-width="2.5"/>
+            <path d="m464 243 9-51m87 49-9-51" fill="none" stroke-width="2"/>
+            <path d="m499 132-1 18q14 13 27-1l-2-19" fill="#ffd1b0"/>
+            <path d="M468 85q-1-42 43-41 45 2 44 47l-7 36q-18 30-43 20-26-8-32-31Z" fill="#ffd1b0"/>
+            <path d="m467 98-6-25 11-8-1-17 15 3 12-18 14 12 23-9 5 15 19 7-4 33-10 13-6-29-17 11-14-16-13 22-15-10-6 23Z" fill="#293f37"/>
+            <path d="M463 88q-8-57 43-61 55-3 58 59" fill="none" stroke-width="9"/>
+            <rect x="458" y="81" width="15" height="32" rx="7" fill="#e5f58a" transform="rotate(-9 458 81)"/>
+            <rect x="548" y="81" width="15" height="32" rx="7" fill="#e5f58a" transform="rotate(9 548 81)"/>
+            <path d="M482 106q7-10 14 0m25 0q7-10 13 0" fill="none"/>
+            <path d="M495 122q14 24 29-1Z" fill="#faf9f3" stroke-width="2.5"/>
+            <path d="M501 134q8-6 16-1" fill="none" stroke="#ed9482" stroke-width="4"/>
+            <path d="m483 118 5 1m43-1 5-1" stroke="#eb8c7e" stroke-width="5"/>
+            <path d="m416 128-9-14-15-13q-3-7 4-7l14 7-9-23q1-7 6-2l12 23-1-28q4-6 8 0l3 26 5-12q5-4 7 2l-1 28-4 12Z" fill="#ffd1b0"/>
+            <path d="m578 80-3-19-1-19q2-8 7-2l5 19 4-31q4-7 8 0l-1 30 8-22q5-4 7 2l-5 30-7 15Z" fill="#ffd1b0"/>
+            <path d="m414 128 23-10m140-35 23 3" stroke="#fff3d8" stroke-width="8"/>
+          </g>
+          <g fill="#fff9e8" stroke="#193b32" stroke-width="2">
+            <path d="m405 44 3-11 4 11 11 3-11 4-4 11-3-11-11-4Z"/>
+            <path d="m617 33 3-9 3 9 9 3-9 3-3 9-3-9-9-3Z"/>
+          </g>
+        </svg>
+        <div class="speech-bubble">이번 주 주인공은<br><span>바로 우리! 🔥</span></div>
+        <div class="vibe-sticker" aria-label="좋은 기분만 가득"><div>GOOD VIBES<b aria-hidden="true">😎</b>ONLY!</div></div>
+        <div class="art-caption">📸 우리의 가을, 레전드로 남기자!</div>
+      </div>
+
+      <div class="ticker" aria-hidden="true">
+        <span>✦ FRIENDS <i>✦</i> GOOD VIBES <i>✦</i> HAPPY MEMORIES <i>✦</i> 우리들의 가을</span>
+        <span><i>✦</i> FRIENDS <i>✦</i> GOOD VIBES</span>
+      </div>
+
+      <section class="event-details" aria-label="행사 일정과 장소">
+        <div class="details-grid">
+          <div class="detail-card">
+            <span class="detail-emoji" aria-hidden="true">🗓️</span>
+            <div>
+              <span class="detail-label">WHEN · 언제 만나?</span>
+              <strong class="detail-value"><time datetime="2026-11-01">2026.11.01</time> <small>일</small> — <time datetime="2026-11-05">11.05</time> <small>목</small></strong>
+              <span class="detail-sub">11월 1일부터 5일까지, 함께하는 5일!</span>
+            </div>
+          </div>
+          <div class="detail-card location">
+            <span class="detail-emoji" aria-hidden="true">📍</span>
+            <div>
+              <span class="detail-label">WHERE · 여기서 만나!</span>
+              <strong class="detail-value">월드컵경기장</strong>
+              <span class="detail-sub">친구들과 함께, 설렘 가득한 그곳 🏟️</span>
+            </div>
+          </div>
+        </div>
+        <div class="poster-footer">
+          <p class="footer-message">가방엔 설렘, 마음엔 즐거움. 우리 거기서 만나! 🧡</p>
+          <span class="footer-tags">#상암중학교 &nbsp; #우리들의가을 &nbsp; #추억저장완료</span>
+        </div>
+      </section>
+    </article>
+    <footer class="page-footer"><span>함께라서 더 특별한, 상암중학교의 가을 🍂</span><span>MADE FOR OUR MOMENT.</span></footer>
+  </main>
+  <script>
+    document.getElementById("print-poster").addEventListener("click", () => window.print());
+  </script>
+</body>
 </html>
